@@ -1,25 +1,18 @@
 package auctionDatabase;
 
 public class Auction {
-	int timeRemaining;
-	double currentBid;
-	String auctionID;
-	String sellerName;
-	String buyerName;
-	String itemInfo;
+	int timeRemaining; // time remaining in hours
+	double currentBid; // current highest bid
+	String auctionID; // id of auction
+	String sellerName; // name of seller
+	String buyerName; // name of buyer
+	String itemInfo; // item info
 
 	/**
 	 * @return The timeRemaining of this instance
 	 */
 	public int getTimeRemaining() {
 		return timeRemaining;
-	}
-
-	/**
-	 * @param timeRemaining The new timeRemaining to set
-	 */
-	public void setTimeRemaining(int timeRemaining) {
-		this.timeRemaining = timeRemaining;
 	}
 
 	/**
@@ -30,24 +23,10 @@ public class Auction {
 	}
 
 	/**
-	 * @param currentBid The new currentBid to set
-	 */
-	public void setCurrentBid(double currentBid) {
-		this.currentBid = currentBid;
-	}
-
-	/**
 	 * @return The auctionID of this instance
 	 */
 	public String getAuctionID() {
 		return auctionID;
-	}
-
-	/**
-	 * @param auctionID The new auctionID to set
-	 */
-	public void setAuctionID(String auctionID) {
-		this.auctionID = auctionID;
 	}
 
 	/**
@@ -58,13 +37,6 @@ public class Auction {
 	}
 
 	/**
-	 * @param sellerName The new sellerName to set
-	 */
-	public void setSellerName(String sellerName) {
-		this.sellerName = sellerName;
-	}
-
-	/**
 	 * @return The buyerName of this instance
 	 */
 	public String getBuyerName() {
@@ -72,24 +44,10 @@ public class Auction {
 	}
 
 	/**
-	 * @param buyerName The new buyerName to set
-	 */
-	public void setBuyerName(String buyerName) {
-		this.buyerName = buyerName;
-	}
-
-	/**
 	 * @return The itemInfo of this instance
 	 */
 	public String getItemInfo() {
 		return itemInfo;
-	}
-
-	/**
-	 * @param itemInfo The new itemInfo to set
-	 */
-	public void setItemInfo(String itemInfo) {
-		this.itemInfo = itemInfo;
 	}
 
 	/**
@@ -104,6 +62,36 @@ public class Auction {
 			this.timeRemaining = 0;
 		} else {
 			this.timeRemaining -= time;
+		}
+	}
+
+	/**
+	 * Makes a new bid on this auction. If bidAmt is larger than currentBid, then
+	 * the value of currentBid is replaced by bidAmt and buyerName is is replaced by
+	 * bidderName.
+	 * 
+	 * <dl>
+	 * <dt>Preconditions</dt>
+	 * <dd>The auction is not closed. In other words, timeRemaining > 0.</dd>
+	 * </dl>
+	 * 
+	 * <dl>
+	 * <dt>Postconditions</dt>
+	 * <dd><code>currentBid</code> reflects the largest bid placed on this object.
+	 * If the auction is closed, throw a ClosedAuctionException.</dd>
+	 * </dl>
+	 * 
+	 * @param bidderName The name of the bidder
+	 * @param bidAmt     The amount that is being put up for bid
+	 * @throws ClosedAuctionException If the auction is closed
+	 */
+	public void newBid(String bidderName, double bidAmt) throws ClosedAuctionException {
+		if (this.timeRemaining == 0) {
+			throw new ClosedAuctionException("You can't bid on a closed auction");
+		}
+		if (bidAmt > this.currentBid) {
+			this.currentBid = bidAmt;
+			this.buyerName = bidderName;
 		}
 	}
 }
