@@ -1,5 +1,11 @@
 package auctionDatabase;
 
+/**
+ * <code>Auction</code> represents an auction currently in the database.
+ *
+ * @author Sayan Sivakumaran e-mail: sayan.sivakumaran@stonybrook.edu Stony
+ *         Brook ID: 110261379
+ **/
 public class Auction {
 	int timeRemaining; // time remaining in hours
 	double currentBid; // current highest bid
