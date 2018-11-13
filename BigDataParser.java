@@ -1,5 +1,7 @@
 package auctionDatabase;
 
+import java.text.DecimalFormat;
+
 /**
  * Parses the information coming from the big data library for use in the
  * application.
@@ -14,7 +16,7 @@ public class BigDataParser {
 	 * @param timeLeft The time_left field in the XML
 	 * @return The number of hours represented by timeLeft
 	 */
-	public static int parseTimeLeft(String timeLeft) {
+	public static int getTimeLeft(String timeLeft) {
 		String[] words = timeLeft.split(" ");
 		if (words.length == 2) {
 			if (words[1].contains("day")) {
@@ -24,5 +26,22 @@ public class BigDataParser {
 			}
 		}
 		return Integer.parseInt(words[0]) * 24 + Integer.parseInt(words[2]);
+	}
+
+	public static double getCurrentBid(String currentBid) {
+		DecimalFormat df = new DecimalFormat("#.##");
+		return Double.parseDouble(currentBid.replace("$", "").replaceAll(",", ""));
+	}
+
+	/**
+	 * Returns item information given various types of sub information.
+	 * 
+	 * @param memory    Memory of auction item
+	 * @param hardDrive Hard drive of auction item
+	 * @param cpu       CPU of auction item
+	 * @return String summarizing item info
+	 */
+	public static String getItemInfo(String memory, String hardDrive, String cpu) {
+		return cpu + hardDrive + " - " + memory;
 	}
 }

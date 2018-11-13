@@ -100,4 +100,25 @@ public class Auction {
 			this.buyerName = bidderName;
 		}
 	}
+
+	/**
+	 * Returns an instance of Auction
+	 * 
+	 * @param timeRemaining The time remaining in hours
+	 * @param currentBid    The current highest bid on the auction
+	 * @param auctionID     The ID of the auction
+	 * @param sellerName    The name of the seller
+	 * @param buyerName     The name of the buyer
+	 * @param itemInfo      Item information
+	 */
+	public Auction(int timeRemaining, double currentBid, String auctionID, String sellerName, String buyerName,
+			String itemInfo) {
+		super();
+		this.timeRemaining = timeRemaining;
+		this.currentBid = currentBid;
+		this.auctionID = auctionID;
+		this.sellerName = sellerName;
+		this.buyerName = buyerName;
+		this.itemInfo = itemInfo;
+	}
 }
