@@ -12,6 +12,8 @@ package auctionDatabase;
  **/
 public class AuctionSystem {
 	public static void main(String[] args) {
-		AuctionTable.buildFromURL("http://tinyurl.com/nbf5g2h");
+		AuctionTable auctionTable = AuctionTable.buildFromURL("http://tinyurl.com/nbf5g2h");
+		auctionTable.printTable();
+
 	}
 }

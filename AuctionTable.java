@@ -1,5 +1,6 @@
 package auctionDatabase;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import big.data.DataSource;
@@ -11,7 +12,7 @@ import big.data.DataSource;
  * @author Sayan Sivakumaran e-mail: sayan.sivakumaran@stonybrook.edu Stony
  *         Brook ID: 110261379
  **/
-public class AuctionTable extends HashMap<String, Auction> {
+public class AuctionTable extends HashMap<String, Auction> implements Serializable {
 	private static final long serialVersionUID = 8196374631832076761L;
 
 	/**
@@ -118,6 +119,24 @@ public class AuctionTable extends HashMap<String, Auction> {
 		for (String key : keySet()) {
 			if (get(key).getTimeRemaining() == 0)
 				remove(key);
+		}
+	}
+
+	/**
+	 * Prints the AuctionTable in tabular form.
+	 */
+	public void printTable() {
+		String TableHeader = String.format("| %-12s| %-12s| %-24s| %-24s| %-10s| %-110s|", "Auction ID", "Bid",
+				"Seller", "Buyer", "Time", "Item Info");
+		int tableWidth = 12 + 12 + 24 + 24 + 10 + 110 + 2 * 6 + 1; // Spaces used in string format above
+		String HeaderSeparator = "";
+		for (int i = 0; i < tableWidth; i++) {
+			HeaderSeparator += "=";
+		}
+		System.out.println(TableHeader);
+		System.out.println(HeaderSeparator);
+		for (Auction auction : values()) {
+			System.out.println(auction.toString());
 		}
 	}
 }

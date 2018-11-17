@@ -121,4 +121,10 @@ public class Auction {
 		this.buyerName = buyerName;
 		this.itemInfo = itemInfo;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("| %-12s| %-12s| %-24s| %-24s| %-10s| %-110s|", auctionID, currentBid, sellerName,
+				buyerName, timeRemaining, itemInfo);
+	}
 }
