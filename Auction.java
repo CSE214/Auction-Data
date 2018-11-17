@@ -1,5 +1,7 @@
 package auctionDatabase;
 
+import java.text.DecimalFormat;
+
 /**
  * <code>Auction</code> represents an auction currently in the database.
  *
@@ -124,7 +126,8 @@ public class Auction {
 
 	@Override
 	public String toString() {
-		return String.format("| %-12s| %-12s| %-24s| %-24s| %-10s| %-110s|", auctionID, currentBid, sellerName,
-				buyerName, timeRemaining, itemInfo);
+		DecimalFormat df = new DecimalFormat("0.00");
+		return String.format("| %-12s| $%-12s| %-24s| %-24s| %-11s| %-110s|", auctionID, df.format(currentBid),
+				sellerName, buyerName, timeRemaining + " hours", itemInfo);
 	}
 }

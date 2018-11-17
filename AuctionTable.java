@@ -126,9 +126,9 @@ public class AuctionTable extends HashMap<String, Auction> implements Serializab
 	 * Prints the AuctionTable in tabular form.
 	 */
 	public void printTable() {
-		String TableHeader = String.format("| %-12s| %-12s| %-24s| %-24s| %-10s| %-110s|", "Auction ID", "Bid",
+		String TableHeader = String.format("| %-12s| %-13s| %-24s| %-24s| %-11s| %-110s|", "Auction ID", "Bid",
 				"Seller", "Buyer", "Time", "Item Info");
-		int tableWidth = 12 + 12 + 24 + 24 + 10 + 110 + 2 * 6 + 1; // Spaces used in string format above
+		int tableWidth = 12 + 13 + 24 + 24 + 11 + 110 + 2 * 6 + 1; // Spaces used in string format above
 		String HeaderSeparator = "";
 		for (int i = 0; i < tableWidth; i++) {
 			HeaderSeparator += "=";

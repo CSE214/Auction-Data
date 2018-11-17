@@ -1,7 +1,5 @@
 package auctionDatabase;
 
-import java.text.DecimalFormat;
-
 /**
  * Parses the information coming from the big data library for use in the
  * application.
@@ -29,7 +27,6 @@ public class BigDataParser {
 	}
 
 	public static double getCurrentBid(String currentBid) {
-		DecimalFormat df = new DecimalFormat("#.##");
 		return Double.parseDouble(currentBid.replace("$", "").replaceAll(",", ""));
 	}
 
