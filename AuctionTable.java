@@ -1,7 +1,7 @@
 package auctionDatabase;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import big.data.DataSource;
 
@@ -12,7 +12,7 @@ import big.data.DataSource;
  * @author Sayan Sivakumaran e-mail: sayan.sivakumaran@stonybrook.edu Stony
  *         Brook ID: 110261379
  **/
-public class AuctionTable extends HashMap<String, Auction> implements Serializable {
+public class AuctionTable extends ConcurrentHashMap<String, Auction> implements Serializable {
 	private static final long serialVersionUID = 8196374631832076761L;
 
 	/**

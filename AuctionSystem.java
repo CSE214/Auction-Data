@@ -126,8 +126,26 @@ public class AuctionSystem {
 		auctionTable.printTable();
 	}
 
-	public static void letTimePass() {
+	/**
+	 * Removes all expired auctions from the auctionTable
+	 */
+	public static void removeExpiredAuctions() {
+		System.out.println("Removing expired auctions...");
+		auctionTable.removeExpiredAuctions();
+		System.out.println("All expired auctions removed.");
+	}
 
+	/**
+	 * Lets the specified number of hours pass in the simulation. All auctions will
+	 * have their time remaining updates.
+	 */
+	public static void letTimePass() {
+		System.out.print("How many hours should pass?: ");
+		int hours = in.nextPositiveInt();
+
+		System.out.println("\nTime passing...");
+		auctionTable.letTimePass(hours);
+		System.out.println("Auction times updated.");
 	}
 
 	/**
@@ -162,6 +180,10 @@ public class AuctionSystem {
 		}
 		case ("P"): {
 			printTable();
+			break;
+		}
+		case ("R"): {
+			removeExpiredAuctions();
 			break;
 		}
 		case ("T"): {
