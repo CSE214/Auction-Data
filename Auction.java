@@ -92,15 +92,17 @@ public class Auction {
 	 * @param bidderName The name of the bidder
 	 * @param bidAmt     The amount that is being put up for bid
 	 * @throws ClosedAuctionException If the auction is closed
+	 * @throws InvalidBidException    If the bid is not high enough
 	 */
-	public void newBid(String bidderName, double bidAmt) throws ClosedAuctionException {
+	public void newBid(String bidderName, double bidAmt) throws ClosedAuctionException, InvalidBidException {
 		if (this.timeRemaining == 0) {
 			throw new ClosedAuctionException("You can't bid on a closed auction");
 		}
-		if (bidAmt > this.currentBid) {
-			this.currentBid = bidAmt;
-			this.buyerName = bidderName;
+		if (bidAmt <= this.currentBid) {
+			throw new InvalidBidException("That bid isn't high enough");
 		}
+		this.currentBid = bidAmt;
+		this.buyerName = bidderName;
 	}
 
 	/**

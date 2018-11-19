@@ -1,5 +1,7 @@
 package auctionDatabase;
 
+import java.text.DecimalFormat;
+
 /**
  * This class will allow the user to interact with the database by listing open
  * auctions, make bids on open auctions, and create new auctions for different
@@ -20,6 +22,7 @@ public class AuctionSystem {
 	 */
 	public static void init() {
 		in = new InputHandler();
+		auctionTable = new AuctionTable();
 		System.out.print("Please select a username: ");
 		username = in.nextLine();
 	}
@@ -71,6 +74,44 @@ public class AuctionSystem {
 	}
 
 	/**
+	 * Places a bid on an existing auction.
+	 */
+	public static void makeBid() {
+		System.out.print("Please enter an Auction ID: ");
+		String id = in.nextLine();
+		Auction auction = auctionTable.getAuction(id);
+		if (auction == null) {
+			System.out.println("\nThat auction does not exist.");
+		} else if (auction.timeRemaining == 0) {
+			DecimalFormat df = new DecimalFormat("0.00");
+			System.out.println("\nAuction " + auction.getAuctionID() + " is CLOSED.");
+			System.out.println("\tCurrent Bid: $" + df.format(auction.getCurrentBid()));
+			System.out.println("\nYou can no longer bid on this item.");
+		} else {
+			DecimalFormat df = new DecimalFormat("0.00");
+			System.out.println("\nAuction " + auction.getAuctionID() + " is OPEN.");
+			System.out.println("\tCurrent Bid: $" + df.format(auction.getCurrentBid()));
+			System.out.print("\nWhat would you like to bid?: ");
+			double bid = in.nextPositiveDouble();
+			try {
+				auction.newBid(username, bid);
+				System.out.println("Bid accepted.");
+			} catch (ClosedAuctionException e) {
+				System.out.println("The auction is already closed.");
+			} catch (InvalidBidException e) {
+				System.out.println("That bid is not high enough.");
+			}
+		}
+	}
+
+	/**
+	 * Prints out information on the desired auction to the user.
+	 */
+	public static void printInfo() {
+
+	}
+
+	/**
 	 * Prints the current auctionTable to the user in tabular format.
 	 */
 	public static void printTable() {
@@ -97,6 +138,14 @@ public class AuctionSystem {
 		}
 		case ("A"): {
 			createAuction();
+			break;
+		}
+		case ("B"): {
+			makeBid();
+			break;
+		}
+		case ("I"): {
+			printInfo();
 			break;
 		}
 		case ("P"): {
