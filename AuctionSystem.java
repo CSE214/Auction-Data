@@ -108,7 +108,15 @@ public class AuctionSystem {
 	 * Prints out information on the desired auction to the user.
 	 */
 	public static void printInfo() {
+		System.out.print("Please enter an Auction ID: ");
+		String id = in.nextLine();
+		Auction auction = auctionTable.getAuction(id);
 
+		System.out.println("\nAuction " + auction.getAuctionID() + ":");
+		System.out.println("\tSeller: " + auction.getSellerName());
+		System.out.println("\tBuyer: " + auction.getBuyerName());
+		System.out.println("\tTime: " + auction.getTimeRemaining() + " hours");
+		System.out.println("\tInfo: " + auction.getItemInfo());
 	}
 
 	/**
@@ -116,6 +124,10 @@ public class AuctionSystem {
 	 */
 	public static void printTable() {
 		auctionTable.printTable();
+	}
+
+	public static void letTimePass() {
+
 	}
 
 	/**
@@ -150,6 +162,10 @@ public class AuctionSystem {
 		}
 		case ("P"): {
 			printTable();
+			break;
+		}
+		case ("T"): {
+			letTimePass();
 			break;
 		}
 		default: {
