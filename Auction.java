@@ -1,5 +1,6 @@
-package auctionDatabase;
 
+
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 /**
@@ -8,7 +9,7 @@ import java.text.DecimalFormat;
  * @author Sayan Sivakumaran e-mail: sayan.sivakumaran@stonybrook.edu Stony
  *         Brook ID: 110261379
  **/
-public class Auction {
+public class Auction implements Serializable {
 	int timeRemaining; // time remaining in hours
 	double currentBid; // current highest bid
 	String auctionID; // id of auction
@@ -128,8 +129,13 @@ public class Auction {
 
 	@Override
 	public String toString() {
-		DecimalFormat df = new DecimalFormat("0.00");
-		return String.format("| %-12s| $%-12s| %-24s| %-24s| %-11s| %-110s|", auctionID, df.format(currentBid),
-				sellerName, buyerName, timeRemaining + " hours", itemInfo);
+		if (currentBid == 0) {
+			return String.format("| %-12s| %-13s| %-24s| %-24s| %-11s| %-110s|", auctionID, "", sellerName, buyerName,
+					timeRemaining + " hours", itemInfo);
+		} else {
+			DecimalFormat df = new DecimalFormat("0.00");
+			return String.format("| %-12s| $%-12s| %-24s| %-24s| %-11s| %-110s|", auctionID, df.format(currentBid),
+					sellerName, buyerName, timeRemaining + " hours", itemInfo);
+		}
 	}
 }

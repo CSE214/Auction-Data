@@ -1,4 +1,4 @@
-package auctionDatabase;
+
 
 import java.util.Scanner;
 

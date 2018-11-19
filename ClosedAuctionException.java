@@ -1,4 +1,4 @@
-package auctionDatabase;
+
 
 /**
  * <code>ClosedAuctionException</code> is thrown when a user attempts to bid on

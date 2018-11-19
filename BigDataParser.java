@@ -1,4 +1,4 @@
-package auctionDatabase;
+
 
 /**
  * Parses the information coming from the big data library for use in the
@@ -39,6 +39,6 @@ public class BigDataParser {
 	 * @return String summarizing item info
 	 */
 	public static String getItemInfo(String memory, String hardDrive, String cpu) {
-		return cpu + hardDrive + " - " + memory;
+		return cpu + " " + hardDrive + " - " + memory;
 	}
 }

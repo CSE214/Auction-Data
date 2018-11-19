@@ -1,4 +1,4 @@
-package auctionDatabase;
+
 
 /**
  * <code>InvalidBidException</code> is thrown when a bid isn't high enough to

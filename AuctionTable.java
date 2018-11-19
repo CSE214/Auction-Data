@@ -1,4 +1,4 @@
-package auctionDatabase;
+
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,8 +13,6 @@ import big.data.DataSource;
  *         Brook ID: 110261379
  **/
 public class AuctionTable extends ConcurrentHashMap<String, Auction> implements Serializable {
-	private static final long serialVersionUID = 8196374631832076761L;
-
 	/**
 	 * Uses the BigData library to construct an AuctionTable from a remote data
 	 * source.

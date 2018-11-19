@@ -1,5 +1,12 @@
-package auctionDatabase;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
 
 /**
@@ -21,9 +28,22 @@ public class AuctionSystem {
 	 * Initializes the program parameters.
 	 */
 	public static void init() {
+		System.out.println("Starting...");
 		in = new InputHandler();
-		auctionTable = new AuctionTable();
-		System.out.print("Please select a username: ");
+		try {
+			FileInputStream fileStream = new FileInputStream("auctionTable.obj");
+			ObjectInputStream inStream = new ObjectInputStream(fileStream);
+
+			System.out.println("Loading previous Auction Table...");
+			auctionTable = (AuctionTable) inStream.readObject();
+			inStream.close();
+			fileStream.close();
+		} catch (Exception e) {
+			System.out.println("No previous auction table detected.");
+			System.out.println("Creating new table...");
+			auctionTable = new AuctionTable();
+		}
+		System.out.print("\nPlease select a username: ");
 		username = in.nextLine();
 	}
 
@@ -149,6 +169,31 @@ public class AuctionSystem {
 	}
 
 	/**
+	 * Serializes the auctionTable into a file, and exits the program.
+	 */
+	public static void exitProgram() {
+		FileOutputStream fileStream;
+		try {
+			System.out.println("Writing Auction Table to file...");
+			File auctionTableObj = new File("auctionTable.obj");
+			auctionTableObj.createNewFile();
+			fileStream = new FileOutputStream("auctionTable.obj");
+			ObjectOutputStream outStream = new ObjectOutputStream(fileStream);
+			outStream.writeObject(auctionTable);
+
+			outStream.close();
+			fileStream.close();
+			System.out.println("Done!");
+		} catch (FileNotFoundException e) {
+			System.out.println("The file could not be found.");
+		} catch (IOException e) {
+			System.out.println("An I/O error has occured.");
+		}
+		System.out.println("\nGoodbye.");
+		System.exit(0);
+	}
+
+	/**
 	 * Delegates which function to run depending on the command entered..
 	 * 
 	 * <dl>
@@ -190,6 +235,10 @@ public class AuctionSystem {
 			letTimePass();
 			break;
 		}
+		case ("Q"): {
+			exitProgram();
+			break;
+		}
 		default: {
 			System.out.println("That command is not valid. Please try again.");
 		}
@@ -198,9 +247,6 @@ public class AuctionSystem {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Starting...");
-		System.out.println("No previous auction table detected.");
-		System.out.println("Creating new table...\n");
 		init();
 		commandManager();
 	}
